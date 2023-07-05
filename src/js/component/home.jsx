@@ -1,17 +1,42 @@
-import React from "react";
+import React, {useState} from "react";
 
 const Home = () => {
+	const [tarea, setTarea] = useState("")
+	const [lista, setLista] = useState([])
+
+	function nuevaTarea (e) {
+		e.preventDefault()
+		setLista ([...lista, tarea])
+		setTarea ("")
+	}
+	
+	function eliminar(id){
+		let tareaNueva = []
+		tareaNueva = lista.filter((tarea, index) => {
+			if (index !== id){
+				return tarea
+			}
+		})
+		setLista (tareaNueva)
+	}
 	return(
 		<div className="container">
 			<h1>To Do List</h1>
+			<input type="text" 
+			placeholder="Insert your task" 
+			value = {tarea} 
+			onChange={(e) => setTarea(e.target.value)}>
+			</input>
+			<button onClick={nuevaTarea}>Agregar Tarea</button>
 			<ul>
-				<li><input type="text" placeholder="Insert your task"></input></li>
-				<li>Take breakfast <i class="fas fa-tash-alt"></i></li>
-				<li>Feed my dog <i className="fas fa-tash-alt"></i></li>
-				<li>Drive to work <i className="fas fa-tash-alt"></i></li>
-				<li>Sleep in my bed <i className="fas fa-tash-alt"></i></li>
+				{lista.map((tarea,id) => (
+				<li key={id}>{tarea} 
+				<button onClick={() => eliminar (id)}>
+				<i class="fa fa-trash"></i>
+				</button>
+				</li>
+				))}
 			</ul>
-			<div>23 task</div>
 		</div>
 	);
 };
