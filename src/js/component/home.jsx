@@ -20,9 +20,12 @@ const Home = () => {
 		setLista (tareaNueva)
 	}
 	return(
-		<div className="container">
-			<h1>To Do List</h1>
-			<input type="text" 
+		<div className="container justify-content-center">
+			<h1 style={{marginTop: "50px",}}>
+			To Do List
+			</h1>
+			<input style={{marginTop: "20px", marginLeft: "20px"}}
+			type="text" 
 			placeholder="Insert your task" 
 			value = {tarea} 
 			onChange={(e) => setTarea(e.target.value)}>
@@ -31,8 +34,8 @@ const Home = () => {
 			<ul>
 				{lista.map((tarea,id) => (
 				<li key={id}>{tarea} 
-				<button onClick={() => eliminar (id)}>
-				<i class="fa fa-trash"></i>
+				<button onClick={() => eliminar (id)} style={{marginLeft: "50px"}}>
+				<i className="fa fa-trash"></i>
 				</button>
 				</li>
 				))}
